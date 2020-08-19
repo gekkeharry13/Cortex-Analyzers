@@ -7,7 +7,7 @@ from datetime import datetime
 from cortexutils.analyzer import Analyzer
 import logging
 import os
-import urllib
+import urllib.parse
 import json
 from urllib3.exceptions import InsecureRequestWarning,SubjectAltNameWarning
 
@@ -71,7 +71,7 @@ class IBMQRadarAnalyzer(Analyzer):
     #Function to handle QRadar requests
     def qradar_request(self, http_type, uri, response_code):
         logging.debug("Request to be fired: {} {} Headers: {} Verify: {}".format(http_type, uri, self.headers, self.verify))
-        uri = urllib.quote(uri)
+        uri = urllib.parse.quote(uri)
         request = self.url + uri
         
         #Use error handling to capture any exceptions
