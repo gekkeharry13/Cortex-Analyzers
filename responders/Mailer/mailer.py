@@ -16,6 +16,8 @@ class Mailer(Responder):
             'config.smtp_port', '25')
         self.mail_from = self.get_param(
             'config.from', None, 'Missing sender email address')
+        self.mail_reply_to = self.get_param(
+            'config.reply_to', None)
         self.smtp_auth = self.get_param(
             'config.smtp_auth', False)
         self.username = self.get_param(
@@ -63,6 +65,9 @@ class Mailer(Responder):
         msg['From'] = self.mail_from
         msg['To'] = mail_to
         msg.attach(MIMEText(description, 'plain'))
+        
+        #Add reply-to header
+        msg.add_header('reply-to', self.mail_reply_to)
 
         s = smtplib.SMTP(self.smtp_host, self.smtp_port)
         if self.smtp_auth:

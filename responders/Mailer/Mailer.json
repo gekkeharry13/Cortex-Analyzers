@@ -17,6 +17,13 @@
       "required": true
     },
     {
+      "name": "reply_to",
+      "description": "email address to which the recipient can reply",
+      "type": "string",
+      "multi": false,
+      "required": true
+    },
+    {
       "name": "smtp_host",
       "description": "SMTP server used to send mail",
       "type": "string",
